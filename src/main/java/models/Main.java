@@ -1,8 +1,10 @@
 package models;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import com.operation.api.models.KenobiSatellite;
+import com.operation.api.models.SatoSatellite;
+import com.operation.api.models.SkywalkerSatellite;
+
+import java.util.ArrayList;
 
 
 public class Main {

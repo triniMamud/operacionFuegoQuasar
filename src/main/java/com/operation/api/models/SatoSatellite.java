@@ -1,4 +1,6 @@
-package models;
+package com.operation.api.models;
+
+import models.Position;
 
 public class SatoSatellite extends Satellite {
     public  SatoSatellite (float distance){

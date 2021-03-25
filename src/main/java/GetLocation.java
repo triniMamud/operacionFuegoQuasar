@@ -1,4 +1,7 @@
-import models.*;
+import com.operation.api.models.KenobiSatellite;
+import models.Position;
+import com.operation.api.models.SatoSatellite;
+import com.operation.api.models.SkywalkerSatellite;
 import models.requests.GetLocationRequest;
 
 import java.util.ArrayList;
