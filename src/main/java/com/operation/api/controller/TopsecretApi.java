@@ -33,7 +33,7 @@ public interface TopsecretApi {
         produces = { "aplication/json" }, 
         consumes = { "aplication/json" }, 
         method = RequestMethod.POST)
-    ResponseEntity<DataShipResponse> obtainDataShip(@Parameter(in = ParameterIn.DEFAULT, description = "satellites", required=true, schema=@Schema()) @Valid @RequestBody DataShipRequest body);
+    ResponseEntity<String> obtainDataShip(@Parameter(in = ParameterIn.DEFAULT, description = "satellites", required=true, schema=@Schema()) @Valid @RequestBody DataShipRequest body);
 
 }
 

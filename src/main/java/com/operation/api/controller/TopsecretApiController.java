@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,8 +34,9 @@ public class TopsecretApiController implements TopsecretApi {
     }
 
     @Override
-    public ResponseEntity<DataShipResponse> obtainDataShip(@Parameter(in = ParameterIn.DEFAULT, description = "satellites", required=true, schema=@Schema()) @Valid @RequestBody DataShipRequest body) {
+    @GetMapping("/")
+    public ResponseEntity<String> obtainDataShip(@Parameter(in = ParameterIn.DEFAULT, description = "satellites", required=true, schema=@Schema()) @Valid @RequestBody DataShipRequest body) {
 
-        return new ResponseEntity<DataShipResponse>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<String>(HttpStatus.valueOf("holaaaa"));
     }
 }
