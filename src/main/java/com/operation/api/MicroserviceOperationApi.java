@@ -22,13 +22,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
     public static void main(String[] args) {
         new SpringApplication(MicroserviceOperationApi.class).run(args);
     }
-
-    @RestController
-    class holaController{
-        @GetMapping("/")
-        String hello(){
-            return ("DEPLOYE LA APP NENE");
-        }
-    }
+    
 }
 
