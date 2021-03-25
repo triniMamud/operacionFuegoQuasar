@@ -1,4 +1,4 @@
-package models.requests;
+package com.operation.api.models;
 
 import lombok.Builder;
 import lombok.Getter;

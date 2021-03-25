@@ -1,6 +1,7 @@
 package models;
 
 import com.operation.api.models.KenobiSatellite;
+import com.operation.api.models.Position;
 import com.operation.api.models.SatoSatellite;
 import com.operation.api.models.SkywalkerSatellite;
 
