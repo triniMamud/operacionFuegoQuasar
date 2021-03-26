@@ -1,7 +1,7 @@
 package com.operation.api.requirements.implementations;
 
 import com.operation.api.models.GetMessageRequest;
-import com.operator.api.requirements.HandleRequirement;
+import com.operation.api.requirements.HandleRequirement;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,22 +1,25 @@
 package com.operation.api.requirements.implementations;
 
 import com.operation.api.models.*;
-import com.operator.api.requirements.HandleRequirement;
+import com.operation.api.requirements.HandleRequirement;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-public class ReqGetLocation extends HandleRequirement<GetLocationRequest, Position> {
+public class ReqGetLocation extends HandleRequirement<Float[], Position> {
 
 
     @Override
-    protected Position run(GetLocationRequest request) {
+    protected Position run(Float[] request) {
         ArrayList<Position> kenobiDiameter = new ArrayList<>();
         ArrayList<Position> skywalkerDiameter = new ArrayList<>();
         ArrayList<Position> satoDiameter = new ArrayList<>();
 
-        KenobiSatellite kenobiSatellite = new KenobiSatellite(request.getDistances().get(0));
-        SkywalkerSatellite skywalkerSatellite = new SkywalkerSatellite(request.getDistances().get(1));
-        SatoSatellite satoSatellite = new SatoSatellite(request.getDistances().get(2));
+        KenobiSatellite kenobiSatellite = new KenobiSatellite(request[0]);
+        SkywalkerSatellite skywalkerSatellite = new SkywalkerSatellite(request[1]);
+        SatoSatellite satoSatellite = new SatoSatellite(request[2]);
 
         Position currentCoordinateKenobi = Position.builder().build();
         Position currentCoordinateSkywalker = Position.builder().build();
@@ -36,7 +39,7 @@ public class ReqGetLocation extends HandleRequirement<GetLocationRequest, Positi
             satoDiameter.add(currentCoordinateSato);
         }
 
-        ArrayList<Position> subArray = new ArrayList<Position>();
+        ArrayList<Position> subArray = new ArrayList<>();
         skywalkerDiameter.toArray();
 
         kenobiDiameter.forEach(position -> {
@@ -45,15 +48,22 @@ public class ReqGetLocation extends HandleRequirement<GetLocationRequest, Positi
                 }
         );
 
-        Position emisorPosition = Position.builder().build();
+        Position[] shipPosition = {};
 
-        for (int i = 0; i < subArray.size(); i++) {
-            if(satoDiameter.contains(subArray.get(i))){
-                emisorPosition = Position.builder().x(subArray.get(i).getX()).y(subArray.get(i).getY()).build();
-            }
-        }
+        subArray.forEach(position -> {
+            if (satoDiameter.contains(position))
+                shipPosition[0] = Position.builder().x(position.getX()).y(position.getY()).build();
+        });
 
-        return emisorPosition;
+        List<Position> shipPositions = IntStream
+                .range(0, subArray.size())
+                .filter(i -> satoDiameter.contains(subArray.get(i)))
+                .mapToObj(i -> satoDiameter.get(i))
+                .collect(Collectors.toList());
+
+
+
+        return shipPosition[0];
     }
 }
 
