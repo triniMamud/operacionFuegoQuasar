@@ -10,7 +10,6 @@ import java.util.stream.IntStream;
 
 public class ReqGetLocation extends HandleRequirement<Float[], Position> {
 
-
     @Override
     protected Position run(Float[] request) {
         ArrayList<Position> kenobiDiameter = new ArrayList<>();
@@ -25,7 +24,7 @@ public class ReqGetLocation extends HandleRequirement<Float[], Position> {
         Position currentCoordinateSkywalker = Position.builder().build();
         Position currentCoordinateSato = Position.builder().build();
 
-        for (int i = 0; i < 360; i++) {
+        IntStream.range(0, 360).forEach(i -> {
             currentCoordinateKenobi.setX((kenobiSatellite.getPosition().getX() + (float)(Math.cos(i)*kenobiSatellite.getDistance())));
             currentCoordinateKenobi.setY((kenobiSatellite.getPosition().getY() + (float)(Math.sin(i)*kenobiSatellite.getDistance())));
             kenobiDiameter.add(currentCoordinateKenobi);
@@ -37,7 +36,7 @@ public class ReqGetLocation extends HandleRequirement<Float[], Position> {
             currentCoordinateSato.setX((satoSatellite.getPosition().getX() + (float)(Math.cos(i)*satoSatellite.getDistance())));
             currentCoordinateSato.setY((satoSatellite.getPosition().getY() + (float)(Math.sin(i)*satoSatellite.getDistance())));
             satoDiameter.add(currentCoordinateSato);
-        }
+        });
 
         ArrayList<Position> subArray = new ArrayList<>();
         skywalkerDiameter.toArray();
@@ -48,22 +47,13 @@ public class ReqGetLocation extends HandleRequirement<Float[], Position> {
                 }
         );
 
-        Position[] shipPosition = {};
-
-        subArray.forEach(position -> {
-            if (satoDiameter.contains(position))
-                shipPosition[0] = Position.builder().x(position.getX()).y(position.getY()).build();
-        });
-
-        List<Position> shipPositions = IntStream
+        List<Position> shipPosition = IntStream
                 .range(0, subArray.size())
                 .filter(i -> satoDiameter.contains(subArray.get(i)))
                 .mapToObj(i -> satoDiameter.get(i))
                 .collect(Collectors.toList());
 
-
-
-        return shipPosition[0];
+        return shipPosition.get(0);
     }
 }
 

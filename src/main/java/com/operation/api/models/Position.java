@@ -17,10 +17,9 @@ import org.springframework.validation.annotation.Validated;
 @Builder
 @EqualsAndHashCode(of = {"x", "y"})
 public class Position   {
-  @JsonProperty("x")
+    @JsonProperty("x")
   private Float x = null;
 
-  @JsonProperty("y")
+    @JsonProperty("y")
   private Float y = null;
-
 }
