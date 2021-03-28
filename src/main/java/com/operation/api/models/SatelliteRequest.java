@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -21,7 +22,7 @@ public class SatelliteRequest   {
   private Float distance = null;
 
   @JsonProperty("message")
-  private String message = null;
+  private ArrayList<String> message = null;
 
   public SatelliteRequest name(String name) {
     this.name = name;
@@ -61,7 +62,7 @@ public class SatelliteRequest   {
     this.distance = distance;
   }
 
-  public SatelliteRequest message(String message) {
+  public SatelliteRequest message(ArrayList<String> message) {
     this.message = message;
     return this;
   }
@@ -72,11 +73,11 @@ public class SatelliteRequest   {
    **/
   @Schema(description = "")
   
-    public String getMessage() {
+    public ArrayList<String> getMessage() {
     return message;
   }
 
-  public void setMessage(String message) {
+  public void setMessage(ArrayList<String> message) {
     this.message = message;
   }
 

@@ -36,6 +36,25 @@ paths:
                     $ref: '#/components/schemas/Position'
                   message:
                     type: string
+        404:
+          description: The message or the possition couldn't be determinated
+  /topsecret_split:
+    post:
+      summary: receives different parts of the message
+        operationId: receiveDataShip
+        requestBody:
+          description: informationSplit
+          required: true
+          content:
+            aplication/json:
+              schema:
+                type: object
+                title: dataShipRequest
+                properties:
+                  satellites:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Satellite'
 components:
   schemas:
     Satellite:
@@ -47,7 +66,9 @@ components:
           type: number
           format: float
         message:
-          type: string
+          type: array
+          items:
+            type: string
     Position:
       type: object
       properties:

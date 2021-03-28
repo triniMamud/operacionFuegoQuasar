@@ -10,5 +10,8 @@ import java.util.ArrayList;
 @Getter
 @Setter
 public class GetMessageRequest {
-    private ArrayList<ArrayList<String>> messages;
+    private ArrayList<String> kenobiMessage;
+    private ArrayList<String> skywalkerMessage;
+    private ArrayList<String> satoMessage;
+
 }

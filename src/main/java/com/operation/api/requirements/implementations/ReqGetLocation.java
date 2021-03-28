@@ -1,17 +1,27 @@
 package com.operation.api.requirements.implementations;
 
+import com.operation.api.exceptions.InvalidRequestException;
+import com.operation.api.exceptions.PositionNotFoundException;
 import com.operation.api.models.*;
 import com.operation.api.requirements.HandleRequirement;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+@Component
 public class ReqGetLocation extends HandleRequirement<Float[], Position> {
 
     @Override
     protected Position run(Float[] request) {
+        //Validation
+        if (request == null){
+            throw new InvalidRequestException();
+        }
+
+        //Excecution
         ArrayList<Position> kenobiDiameter = new ArrayList<>();
         ArrayList<Position> skywalkerDiameter = new ArrayList<>();
         ArrayList<Position> satoDiameter = new ArrayList<>();
@@ -38,20 +48,15 @@ public class ReqGetLocation extends HandleRequirement<Float[], Position> {
             satoDiameter.add(currentCoordinateSato);
         });
 
-        ArrayList<Position> subArray = new ArrayList<>();
-        skywalkerDiameter.toArray();
-
-        kenobiDiameter.forEach(position -> {
-                    if (skywalkerDiameter.contains(position))
-                        subArray.add(position);
-                }
-        );
-
         List<Position> shipPosition = IntStream
-                .range(0, subArray.size())
-                .filter(i -> satoDiameter.contains(subArray.get(i)))
+                .range(0, kenobiDiameter.size())
+                .filter(i -> kenobiDiameter.contains(skywalkerDiameter.get(i)) && kenobiDiameter.contains(satoDiameter.get(i)))
                 .mapToObj(i -> satoDiameter.get(i))
                 .collect(Collectors.toList());
+
+        if (shipPosition.isEmpty()){
+            throw new PositionNotFoundException();
+        }
 
         return shipPosition.get(0);
     }

@@ -1,5 +1,6 @@
 package com.operation.api.requirements.implementations;
 
+import com.operation.api.exceptions.InvalidRequestException;
 import com.operation.api.models.GetMessageRequest;
 import com.operation.api.requirements.HandleRequirement;
 import org.springframework.stereotype.Component;
@@ -9,11 +10,17 @@ public class ReqGetLongestMessageSize extends HandleRequirement<GetMessageReques
 
     @Override
     protected Integer run(GetMessageRequest request) {
-        int longestSize = request.getMessages().get(0).size();
-        if(request.getMessages().get(0).size() > request.getMessages().get(1).size())
-            longestSize = request.getMessages().get(1).size();
-        if(request.getMessages().get(1).size() > request.getMessages().get(2).size())
-            longestSize = request.getMessages().get(2).size();
+        //Validation
+        if (request == null){
+            throw new InvalidRequestException();
+        }
+
+        //Excecution
+        int longestSize = request.getKenobiMessage().size();
+        if(request.getKenobiMessage().size() > request.getSkywalkerMessage().size())
+            longestSize = request.getSkywalkerMessage().size();
+        if(request.getSkywalkerMessage().size() > request.getSatoMessage().size())
+            longestSize = request.getSatoMessage().size();
 
         return longestSize;
     }

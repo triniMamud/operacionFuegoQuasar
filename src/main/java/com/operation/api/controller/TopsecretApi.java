@@ -22,13 +22,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-27T22:18:49.062Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-28T02:50:56.077Z[GMT]")
 @Validated
 public interface TopsecretApi {
 
     @Operation(summary = "obtains the location and the emited message of the ship", description = "", tags={  })
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Ok", content = @Content(schema = @Schema(implementation = DataShipResponse.class))) })
+    @ApiResponses(value = { 
+        @ApiResponse(responseCode = "200", description = "Ok", content = @Content(schema = @Schema(implementation = DataShipResponse.class))),
+        
+        @ApiResponse(responseCode = "404", description = "The message or the possition couldn't be determinated") })
     @RequestMapping(value = "/topsecret",
         produces = { "aplication/json" }, 
         consumes = { "aplication/json" }, 

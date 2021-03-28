@@ -36,6 +36,8 @@ paths:
                     $ref: '#/components/schemas/Position'
                   message:
                     type: string
+        404:
+          description: The message or the possition couldn't be determinated
 components:
   schemas:
     Satellite:
@@ -47,7 +49,9 @@ components:
           type: number
           format: float
         message:
-          type: string
+          type: array
+          items:
+            type: string
     Position:
       type: object
       properties:

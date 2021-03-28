@@ -1,9 +1,9 @@
 package models;
 
-import com.operation.api.models.KenobiSatellite;
-import com.operation.api.models.Position;
-import com.operation.api.models.SatoSatellite;
-import com.operation.api.models.SkywalkerSatellite;
+import com.operation.api.models.*;
+import com.operation.api.requirements.implementations.ReqGetLongestMessageSize;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,18 +24,17 @@ public class Main {
         kenobiMessage.add("mensaje");
 
         ArrayList<String> skywalkerMessage = new ArrayList<>();
+        skywalkerMessage.add("");
+        skywalkerMessage.add("");
+        skywalkerMessage.add("");
         skywalkerMessage.add("este");
         skywalkerMessage.add("es");
         skywalkerMessage.add("un");
         skywalkerMessage.add("mensaje");
 
         ArrayList<String> satoMessage = new ArrayList<>();
-        satoMessage.add("");
-        satoMessage.add("");
-        satoMessage.add("");
-        satoMessage.add("es");
-        satoMessage.add("");
-        satoMessage.add("mensaje");
+        System.out.println(satoMessage.isEmpty()
+                );
 
         int longest = kenobiMessage.size();
         if(kenobiMessage.size() < skywalkerMessage.size())
@@ -69,7 +68,33 @@ public class Main {
                 array.add(satoMessage.get(i));
         }
 
-        System.out.println(String.join(" ", array));
+
+        String shipMessage = null;
+        Position shipPosition = Position.builder().build();
+
+        GetMessageRequest getMessageRequest = GetMessageRequest
+                .builder()
+                .kenobiMessage(body.getSatellites().get(0).getMessage())
+                .skywalkerMessage(body.getSatellites().get(1).getMessage())
+                .satoMessage(body.getSatellites().get(2).getMessage())
+                .build();
+
+        Float[] distances = {
+                body.getSatellites().get(0).getDistance(),
+                body.getSatellites().get(1).getDistance(),
+                body.getSatellites().get(2).getDistance(),
+        };
+
+        shipMessage = reqGetMessage.ejecutar(getMessageRequest);
+        shipPosition = reqGetLocation.ejecutar(distances);
+
+        DataShipResponse dataShipResponse = DataShipResponse.builder().message(shipMessage).position(shipPosition).build();
+
+        if (dataShipResponse == null)
+            return ResponseEntity.status(404).build();
+
+        return ResponseEntity.ok(dataShipResponse);
+
 
     }
 

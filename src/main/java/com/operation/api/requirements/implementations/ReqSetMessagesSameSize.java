@@ -1,5 +1,6 @@
 package com.operation.api.requirements.implementations;
 
+import com.operation.api.exceptions.InvalidRequestException;
 import com.operation.api.models.GetMessageRequest;
 import com.operation.api.requirements.HandleRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,22 @@ public class ReqSetMessagesSameSize extends HandleRequirement<GetMessageRequest,
 
     @Override
     protected GetMessageRequest run(GetMessageRequest request) {
-        for (int i = 0 ; i < request.getMessages().size(); i++) {
-            while (request.getMessages().get(i).size() < reqGetLongestMessageSize.run(request)) {
-                request.getMessages().get(i).add(0, "");
-            }
+        //Validation
+        if (request == null){
+            throw new InvalidRequestException();
         }
+
+        //Excecution
+        while (request.getKenobiMessage().size() < reqGetLongestMessageSize.run(request)) {
+            request.getKenobiMessage().add(0, "");
+        }
+        while (request.getSkywalkerMessage().size() < reqGetLongestMessageSize.run(request)) {
+            request.getSkywalkerMessage().add(0, "");
+        }
+        while (request.getSatoMessage().size() < reqGetLongestMessageSize.run(request)) {
+            request.getSatoMessage().add(0, "");
+        }
+
         return request;
     }
 }
