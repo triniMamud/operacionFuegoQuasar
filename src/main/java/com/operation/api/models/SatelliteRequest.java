@@ -11,7 +11,7 @@ import java.util.Objects;
  * SatelliteRequest
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-25T05:21:23.623Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen")
 
 
 public class SatelliteRequest   {

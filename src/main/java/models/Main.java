@@ -1,17 +1,6 @@
 package models;
 
-import com.operation.api.models.*;
-import com.operation.api.requirements.implementations.ReqGetLongestMessageSize;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -68,8 +57,8 @@ public class Main {
                 array.add(satoMessage.get(i));
         }
 
-
-        String shipMessage = null;
+//CONTROLLER
+     /*   String shipMessage = null;
         Position shipPosition = Position.builder().build();
 
         GetMessageRequest getMessageRequest = GetMessageRequest
@@ -94,7 +83,7 @@ public class Main {
             return ResponseEntity.status(404).build();
 
         return ResponseEntity.ok(dataShipResponse);
-
+*/
 
     }
 

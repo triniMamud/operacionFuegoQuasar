@@ -3,7 +3,7 @@
  * https://github.com/swagger-api/swagger-codegen
  * Do not edit the class manually.
  */
-package com.operation.api.controller;
+package com.operation.api.controllers;
 
 import com.operation.api.models.DataShipRequest;
 import com.operation.api.models.DataShipResponse;

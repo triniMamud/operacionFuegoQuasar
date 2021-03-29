@@ -23,7 +23,7 @@
     </parent>
 
     <build>
-        <sourceDirectory>C:/Users/admin/Desktop/operacionFuegoQuasar/src/main/java</sourceDirectory>
+        <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

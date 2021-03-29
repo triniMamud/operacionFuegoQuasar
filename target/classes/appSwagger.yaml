@@ -38,6 +38,17 @@ paths:
                     type: string
         404:
           description: The message or the possition couldn't be determinated
+  /topsecret_split:
+    post:
+      summary: receives different parts of the message
+        operationId: receiveDataShip
+        parameters:
+            in: path
+            name: userId
+            schema:
+              type: integer
+            required: true
+            description: Numeric ID of the user to get
 components:
   schemas:
     Satellite:
