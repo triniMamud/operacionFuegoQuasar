@@ -38,6 +38,7 @@ paths:
                     type: string
         404:
           description: The message or the possition couldn't be determinated
+          content: {}
   /topsecret_split:
     get:
       summary: obtains the location and the emited message of the ship
@@ -57,6 +58,7 @@ paths:
                     type: string
         404:
           description: The message or the possition couldn't be determinated
+          content: { }
   /topsecret_split/{satellite_name}:
     post:
       summary: receives different parts of the message
@@ -95,6 +97,9 @@ paths:
                     $ref: '#/components/schemas/SatelliteRequest'
                   message:
                     type: string
+        404:
+          description: The message or the possition couldn't be determinated
+          content: { }
 
 components:
   schemas:

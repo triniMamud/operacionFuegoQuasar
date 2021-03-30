@@ -17,9 +17,9 @@ public class ReqGetLongestMessageSize extends HandleRequirement<GetMessageReques
 
         //Excecution
         int longestSize = request.getKenobiMessage().size();
-        if(request.getKenobiMessage().size() > request.getSkywalkerMessage().size())
+        if(request.getKenobiMessage().size() < request.getSkywalkerMessage().size())
             longestSize = request.getSkywalkerMessage().size();
-        if(request.getSkywalkerMessage().size() > request.getSatoMessage().size())
+        if(request.getSkywalkerMessage().size() < request.getSatoMessage().size())
             longestSize = request.getSatoMessage().size();
 
         return longestSize;

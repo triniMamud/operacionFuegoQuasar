@@ -30,22 +30,24 @@ public class ReqGetLocation extends HandleRequirement<Float[], Position> {
         SkywalkerSatellite skywalkerSatellite = new SkywalkerSatellite(request[1]);
         SatoSatellite satoSatellite = new SatoSatellite(request[2]);
 
-        Position currentCoordinateKenobi = Position.builder().build();
-        Position currentCoordinateSkywalker = Position.builder().build();
-        Position currentCoordinateSato = Position.builder().build();
-
         IntStream.range(0, 360).forEach(i -> {
-            currentCoordinateKenobi.setX((kenobiSatellite.getPosition().getX() + (float)(Math.cos(i)*kenobiSatellite.getDistance())));
-            currentCoordinateKenobi.setY((kenobiSatellite.getPosition().getY() + (float)(Math.sin(i)*kenobiSatellite.getDistance())));
-            kenobiDiameter.add(currentCoordinateKenobi);
+            Position positionKenobi = Position.builder()
+                    .x((float)(kenobiSatellite.getPosition().getX() + kenobiSatellite.getDistance() * Math.cos(i)))
+                    .y((float)(kenobiSatellite.getPosition().getY() + kenobiSatellite.getDistance() * Math.sin(i)))
+                    .build();
+            kenobiDiameter.add(positionKenobi);
 
-            currentCoordinateSkywalker.setX((skywalkerSatellite.getPosition().getX()+ (float)(Math.cos(i)*skywalkerSatellite.getDistance())));
-            currentCoordinateSkywalker.setY((skywalkerSatellite.getPosition().getY() + (float)(Math.sin(i)*skywalkerSatellite.getDistance())));
-            skywalkerDiameter.add(currentCoordinateSkywalker);
+            Position positionSkywalker = Position.builder()
+                    .x((float)(skywalkerSatellite.getPosition().getX() + skywalkerSatellite.getDistance() * Math.cos(i)))
+                    .y((float)(skywalkerSatellite.getPosition().getY() + skywalkerSatellite.getDistance() * Math.sin(i)))
+                    .build();
+            skywalkerDiameter.add(positionSkywalker);
 
-            currentCoordinateSato.setX((satoSatellite.getPosition().getX() + (float)(Math.cos(i)*satoSatellite.getDistance())));
-            currentCoordinateSato.setY((satoSatellite.getPosition().getY() + (float)(Math.sin(i)*satoSatellite.getDistance())));
-            satoDiameter.add(currentCoordinateSato);
+            Position positionSato = Position.builder()
+                    .x((float)(satoSatellite.getPosition().getX() + satoSatellite.getDistance() * Math.cos(i)))
+                    .y((float)(satoSatellite.getPosition().getY() + satoSatellite.getDistance() * Math.sin(i)))
+                    .build();
+            satoDiameter.add(positionSato);
         });
 
         List<Position> shipPosition = IntStream

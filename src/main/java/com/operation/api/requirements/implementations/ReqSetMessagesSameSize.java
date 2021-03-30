@@ -10,8 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReqSetMessagesSameSize extends HandleRequirement<GetMessageRequest, GetMessageRequest> {
 
-    @Autowired
-    ReqGetLongestMessageSize reqGetLongestMessageSize;
+    /*@Autowired
+    ReqGetLongestMessageSize reqGetLongestMessageSize;*/
+    ReqGetLongestMessageSize reqGetLongestMessageSize = new ReqGetLongestMessageSize();
 
     @Override
     protected GetMessageRequest run(GetMessageRequest request) {

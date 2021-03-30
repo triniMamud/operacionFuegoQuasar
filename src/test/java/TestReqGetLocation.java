@@ -1,22 +1,34 @@
+import com.operation.api.exceptions.InvalidRequestException;
+import com.operation.api.exceptions.PositionNotFoundException;
 import com.operation.api.requirements.implementations.ReqGetLocation;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
+
+@RunWith(MockitoJUnitRunner.class)
 public class TestReqGetLocation {
 
-    @Autowired
-    ReqGetLocation reqGetLocation;
+    @InjectMocks
+    private ReqGetLocation reqGetLocation;
 
-   @Before
+    @Before
     public void before() {
-        this.reqGetLocation = new ReqGetLocation();
+        MockitoAnnotations.initMocks(this);
     }
 
-    @Test
-    public void reqGetLocationTest(){
-       float
-        reqGetLocation.ejecutar();
-        Assert.assertEquals("2", "2");
+    @Test (expected = PositionNotFoundException.class)
+    public void verifyPositionNotFoundError(){
+
+        Float[] distances = {200f, 300f, 500f};
+        reqGetLocation.ejecutar(distances);
+    }
+
+    @Test (expected = InvalidRequestException.class)
+    public void verifyRunError(){
+        reqGetLocation.ejecutar(null);
     }
 }

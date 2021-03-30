@@ -18,11 +18,6 @@ import java.util.stream.Stream;
 @Component
 public class ReqGetMessage extends HandleRequirement<GetMessageRequest, String> {
 
-    @Autowired
-    ReqGetLongestMessageSize reqGetLongestMessageSize;
-    @Autowired
-    ReqSetMessagesSameSize reqSetMessagesSameSize;
-
     @Override
     protected String run(GetMessageRequest request) {
         //Validations
@@ -34,9 +29,11 @@ public class ReqGetMessage extends HandleRequirement<GetMessageRequest, String> 
         }
 
         //Excecution
-        ArrayList<String> kenobiMessage = reqSetMessagesSameSize.run(request).getKenobiMessage();
-        ArrayList<String> skywalkerMessage = reqSetMessagesSameSize.run(request).getSkywalkerMessage();
-        ArrayList<String> satoMessage = reqSetMessagesSameSize.run(request).getSatoMessage();
+        ReqSetMessagesSameSize reqSetMessagesSameSize = new ReqSetMessagesSameSize();
+        ReqGetLongestMessageSize reqGetLongestMessageSize = new ReqGetLongestMessageSize();
+        List<String> kenobiMessage = reqSetMessagesSameSize.run(request).getKenobiMessage();
+        List<String> skywalkerMessage = reqSetMessagesSameSize.run(request).getSkywalkerMessage();
+        List<String> satoMessage = reqSetMessagesSameSize.run(request).getSatoMessage();
 
         List<String> messageList = new ArrayList<>();
 
@@ -45,9 +42,13 @@ public class ReqGetMessage extends HandleRequirement<GetMessageRequest, String> 
                 messageList.add(kenobiMessage.get(i));
             else if (!skywalkerMessage.get(i).equals(""))
                 messageList.add(skywalkerMessage.get(i));
-            else if (satoMessage.get(i).equals(""))
+            else if (!satoMessage.get(i).equals(""))
                 messageList.add(satoMessage.get(i));
         }
+
+        System.out.println(kenobiMessage);
+        System.out.println(skywalkerMessage);
+        System.out.println(satoMessage);
 
         if (messageList.isEmpty()){
             throw new MessageNotDecoded();

@@ -22,7 +22,7 @@ paths:
                 satellites:
                   type: array
                   items:
-                    $ref: '#/components/schemas/Satellite'
+                    $ref: '#/components/schemas/SatelliteRequest'
       responses:
         200:
           description: Ok
@@ -39,19 +39,66 @@ paths:
         404:
           description: The message or the possition couldn't be determinated
   /topsecret_split:
+    get:
+      summary: obtains the location and the emited message of the ship
+      operationId: obtainSplitDataShip
+      responses:
+        200:
+          description: Ok
+          content:
+            aplication/json:
+              schema:
+                type: object
+                title: dataShipResponse
+                properties:
+                  position:
+                    $ref: '#/components/schemas/Position'
+                  message:
+                    type: string
+        404:
+          description: The message or the possition couldn't be determinated
+  /topsecret_split/{satellite_name}:
     post:
       summary: receives different parts of the message
-        operationId: receiveDataShip
-        parameters:
-            in: path
-            name: userId
+      operationId: receiveDataShip
+      parameters:
+        - name: satellite_name
+          in: path
+          description: satellite to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          aplication/json:
             schema:
-              type: integer
-            required: true
-            description: Numeric ID of the user to get
+              type: object
+              title: satelliteSplitRequest
+              properties:
+                distance:
+                  type: number
+                  format: float
+                message:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        200:
+          description: Ok
+          content:
+            aplication/json:
+              schema:
+                type: object
+                title: satelliteSplitResponse
+                properties:
+                  position:
+                    $ref: '#/components/schemas/SatelliteRequest'
+                  message:
+                    type: string
+
 components:
   schemas:
-    Satellite:
+    SatelliteRequest:
       type: object
       properties:
         name:

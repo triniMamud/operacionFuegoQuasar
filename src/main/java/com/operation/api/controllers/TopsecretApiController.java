@@ -24,12 +24,10 @@ public class TopsecretApiController implements TopsecretApi {
     private final ObjectMapper objectMapper;
     private final HttpServletRequest request;
 
-    @Autowired
-    ReqGetLocation reqGetLocation;
-    @Autowired
-    ReqGetMessage reqGetMessage;
+    ReqGetLocation reqGetLocation = new ReqGetLocation();
+    ReqGetMessage reqGetMessage = new ReqGetMessage();
 
-    @org.springframework.beans.factory.annotation.Autowired
+    @Autowired
     public TopsecretApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
         this.request = request;
@@ -59,7 +57,7 @@ public class TopsecretApiController implements TopsecretApi {
         DataShipResponse dataShipResponse = DataShipResponse.builder().message(shipMessage).position(shipPosition).build();
 
         if (dataShipResponse == null)
-            return ResponseEntity.status(404).build();
+            return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok(dataShipResponse);
     }
